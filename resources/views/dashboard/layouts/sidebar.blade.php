@@ -13,6 +13,12 @@
             My Post
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('dashboard/keyword*') ? 'active' : '' }}" href="/dashboard/keyword">
+            <span data-feather="file" class="align-text-bottom"></span>
+            Keyword
+          </a>
+        </li>
       </ul>
 
       <hr>

@@ -30,7 +30,8 @@ class PostController extends Controller
         return view('post', [
             'title' => "All Post $title",
             'active' => 'Blog',
-            "post" =>  Post::latest()->filter(request(['search','category','author']))->cursorPaginate(7)->withQueryString()
+            "post" =>  Post::latest()->filter(request(['search','category','author']))->paginate(7)->withQueryString()
+            // "post" =>  Post::latest()->filter(request(['search','category','author']))->get()
         ]);
     }
 
@@ -59,31 +60,42 @@ class PostController extends Controller
     
         $minta_artikel = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => "carikan saya artikel panjang dan menarik yang berjudul: ". $answer_judul. " .ada kesimpulan. maksimalkan dengan tag html h2, h3 , li, p. ada link-link website utama terkait dengan target blank. ",
+            'prompt' => "Saya ingin membuat sebuah artikel untuk tujuan SEO dan peringkat di mesin pencari Google. Tulislah sebuah artikel dengan judul '$answer_judul' dalam bahasa Indonesia yang santai. Artikel tersebut terdiri dari minimal 20 paragraf. Setiap paragraf harus memiliki  300 kata. Sapa pembaca dengan 'Hello' dengan nama audiens 'Sobat NewsClub' pada paragraf pertama bukan di dalam judul!. Tulislah artikel dalam format HTML tanpa tag html dan body. Judul utama: <h1>. Sub judul: <h2>. Judul kesimpulan: <h3>. Paragraf: <p>. dan di akhir artikel ucapkan sampai jumpa kembali di artikel menarik lainnya. ",
             'max_tokens' => 3500,
             'temperature' => 0.3,
             'frequency_penalty' => 0.0,
             'presence_penalty' => 0.0
         ]);
         $answer_artikel = $minta_artikel['choices'][0]['text'];
+        $artikel_non_html = strip_tags($answer_artikel);
+
+        $minta_kesimpulan = OpenAI::completions()->create([
+            'model' => 'text-davinci-003',
+            'prompt' => "buatkan kesimpulan dari artikel $artikel_non_html. ",
+            'max_tokens' => 500,
+            'temperature' => 0.3,
+            'frequency_penalty' => 0.0,
+            'presence_penalty' => 0.0
+        ]);
+        $answer_kesimpulan = $minta_kesimpulan['choices'][0]['text'];
 
         $minta_keyword = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => "ambilkan keyword seo dari: ". $answer_artikel,
+            'prompt' => "ambilkan keyword seo dari: ". $artikel_non_html . "pisahkan dengan koma",
             'max_tokens' => 75,
         ]);
         $answer_keyword = $minta_keyword['choices'][0]['text'];
 
         $minta_description = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => "ambilkan deskripsi seo dari: ". $answer_artikel,
+            'prompt' => "ambilkan deskripsi seo dari: ". $artikel_non_html,
             'max_tokens' => 100,
         ]);
         $answer_description = $minta_description['choices'][0]['text'];
 
         $minta_hashtag = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => "ambilkan hastag seo dari: ". $answer_artikel,
+            'prompt' => "ambilkan hastag seo dari: ". $artikel_non_html,
             'max_tokens' => 75,
         ]);
         $answer_hashtag = $minta_hashtag['choices'][0]['text'];
@@ -95,14 +107,14 @@ class PostController extends Controller
             'user_id' => $random_penulis,
             'title' =>  $answer_judul,
             'slug' =>  $slug,
-            'keyword' => $answer_keyword,
-            'description' => $answer_description,
+            'keyword' => str_replace("Keyword SEO","",$answer_keyword),
+            'description' => str_replace("Deskripsi SEO","",$answer_description),
             'hastag' => $answer_hashtag,
             'body' => $answer_artikel,
+            'kesimpulan' => $answer_kesimpulan,
         ]);
 
-        echo "berhasil di tambahkan : $answer_judul <br>";
-      
+        return redirect('/blog');
        
     }
 }

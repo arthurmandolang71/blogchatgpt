@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('hastag')->nullable();
             $table->text('description');
             $table->text('body');
+            $table->text('kesimpulan');
             $table->timestamps();
         });
     }
