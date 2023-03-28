@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->foreignId('user_id');
+            $table->foreignId('keyword_id');
             $table->string('title');
             $table->string('slug');
             $table->string('keyword')->nullable();
