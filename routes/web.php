@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KeyController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\KeywordController;
@@ -19,62 +20,60 @@ use App\Http\Controllers\DashboardPostController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('home', [
-        'title' => 'Home',
-        'active' => 'Home',
+
+// Route::get('/', function () {
+//     return view('home', [
+//         'title' => 'Home',
+//         'active' => 'Home',
         
-    ]);
-});
+//     ]);
+// });
 
 
 
-Route::get('/about', function () {
-    return view('about', [
-        'title' => 'About',
-        'active' => 'About',
-        'name' => 'arthur mandolang',
-        'email' => 'arthurmandolang@gmail.com',
-        'images' => 'manado.png'
-    ]);
-});
-
-
-Route::get('/blog', [PostController::class, 'index']);
-Route::get('/posts/{post:slug}', [PostController::class, "show"]);
-
-Route::get('/add', [PostController::class, "add"]);
 
 
 
-Route::get('categories', function () {
-        return view('categories', [
-            'title' => 'Post Categoies',
-            'active' => 'Blog',
-            'categories'=> Category::all()
-        ]);
-});
+Route::get('/baca/blog', [PostController::class, 'index']);
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'auth']);
+Route::get('/{post:slug}', [PostController::class, "show"]);
 
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/', [PostController::class, "show"]);
+
+Route::get('baca/add', [PostController::class, "add"]);
+
+
+// Route::get('categories', function () {
+//         return view('categories', [
+//             'title' => 'Post Categoies',
+//             'active' => 'Blog',
+//             'categories'=> Category::all()
+//         ]);
+// });
+
+Route::get('/baca/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/baca/login', [LoginController::class, 'auth']);
+
+Route::post('/baca/logout', [LoginController::class, 'logout']);
 
 // Route::get('register', [RegisterController::class, 'index'])->middleware('guest');
 // Route::post('register', [RegisterController::class, 'store']);
 
-Route::get('dashboard', function() {
+Route::get('/baca/dashboard', function() {
     return view('dashboard.index',[
         'title' => 'dashboard',
     ]);
 })->middleware('auth');
 
 
-Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+// Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
+// Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 // Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('auth');
 
-Route::get('/dashboard/keyword', [KeywordController::class, 'index'])->middleware('auth');
-Route::post('/dashboard/keyword', [KeywordController::class, 'store'])->middleware('auth');
+Route::get('/baca/dashboard/keyword', [KeywordController::class, 'index'])->middleware('auth');
+Route::post('/baca/dashboard/keyword', [KeywordController::class, 'store'])->middleware('auth');
+
+Route::get('/baca/dashboard/keyopenai', [KeyController::class, 'index'])->middleware('auth');
+Route::post('/baca/dashboard/keyopenai', [KeyController::class, 'store'])->middleware('auth');
 

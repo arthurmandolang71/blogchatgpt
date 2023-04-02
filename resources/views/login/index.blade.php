@@ -2,7 +2,7 @@
 
 @section('container')
 <main class="form-signin w-100 m-auto">
-    <form action="/login" method="post">
+    <form action="/baca/login" method="post">
       @csrf
 
       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
@@ -41,16 +41,16 @@
         @enderror
       </div>
 
-      <div class="checkbox mb-3">
+      {{-- <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-      </div>
+      </div> --}}
 
       <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
       
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+      <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
     </form>
-    <small>belum punya akun ?<a href="/register">Registrasi Sekarang</a></small>
+    {{-- <small>belum punya akun ?<a href="/register">Registrasi Sekarang</a></small> --}}
 </main>
 @endsection

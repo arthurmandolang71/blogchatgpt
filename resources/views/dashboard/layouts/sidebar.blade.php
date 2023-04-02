@@ -2,28 +2,34 @@
     <div class="position-sticky pt-3 sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
+          <a class="nav-link {{ Request::is('/baca/dashboard') ? 'active' : '' }}" aria-current="page" href="/baca/dashboard">
             <span data-feather="home" class="align-text-bottom"></span>
             Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
+          <a class="nav-link {{ Request::is('/baca/dashboard/posts*') ? 'active' : '' }}" href="/baca/dashboard/posts">
             <span data-feather="file" class="align-text-bottom"></span>
             My Post
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard/keyword*') ? 'active' : '' }}" href="/dashboard/keyword">
+          <a class="nav-link {{ Request::is('/baca/dashboard/keyword*') ? 'active' : '' }}" href="/baca/dashboard/keyword">
             <span data-feather="file" class="align-text-bottom"></span>
             Keyword
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('/baca/dashboard/keyopenai*') ? 'active' : '' }}" href="/baca/dashboard/keyopenai">
+            <span data-feather="file" class="align-text-bottom"></span>
+            Key Open AI
           </a>
         </li>
       </ul>
 
       <hr>
 
-    @can('admin')
+    {{-- @can('admin')
       <h6 class="sidebar-heading d-flex">
         <span>Administrator</span>
       </h6>
@@ -36,7 +42,7 @@
           </a>
         </li>
       </ul>
-    @endcan
+    @endcan --}}
      
 
     </div>

@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Category;
 use App\Models\Keyword;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use PharIo\Manifest\Author;
 use Illuminate\Http\Request;
 use OpenAI\Laravel\Facades\OpenAI;
 
+
+
+
 class PostController extends Controller
 {
     public function index()
     {
-        $title = '';
+        $title = 'blog';
 
         if(request('category')) {
             $category = Category::firstWhere('slug',request('category'));
@@ -29,24 +32,53 @@ class PostController extends Controller
         }; 
        
         return view('post', [
+            'author' => '',
             'title' => "All Post $title",
+            'description' => 'sobat news',
+            'keyword' => 'news',
             'active' => 'Blog',
-            "post" =>  Post::latest()->filter(request(['search','category','author']))->paginate(7)->withQueryString()
-            // "post" =>  Post::latest()->filter(request(['search','category','author']))->get()
+            "post" =>  Post::latest()->filter(request(['search','category','author']))->paginate(4)->withQueryString()
         ]);
     }
 
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
+    //    dd($request->segment(0));
+    //    if($request->segment(0) == NULL){
+    //         return redirect('baca/blog');
+    //    }
+  
         return view('detailpost',[
-            "title" => "Post detail",
+            'author' => $post->author->name,
+            "title" => $post->title,
+            'description' => $post->description,
+            'keyword' => $post->keyword,
             'active' => 'Blog',
             "post" => $post
         ]);
+    
+
+       
     }
+
+    private function setEnv($key)
+    {
+        file_put_contents(app()->environmentFilePath(), str_replace(
+            "OPENAI_API_KEY=''" ,
+            "OPENAI_API_KEY='$key'" ,
+            file_get_contents(app()->environmentFilePath())
+        ));
+    }
+
+
 
     public function add()
     {
+       
+        // env('OPENAI_API_KEY', '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');
+        // $this->setEnv('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');
+
+
         $random_penulis = rand(2,6);
         $keyword = Keyword::inRandomOrder()->where('status',0)->first();
        
@@ -55,12 +87,14 @@ class PostController extends Controller
             'prompt' => "berikan saya judul artikel tentang $keyword->name dalam bahasa indonesia",
             'max_tokens' => 50,
         ]);
+
+        // return $minta_judul;
         $answer_judul = $minta_judul['choices'][0]['text'];
 
         $minta_artikel = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "Saya ingin membuat sebuah artikel untuk tujuan SEO dan peringkat di mesin pencari Google. Tulislah sebuah artikel dengan judul '$answer_judul' dalam bahasa Indonesia yang santai. Artikel tersebut terdiri dari minimal 20 paragraf. Setiap paragraf harus memiliki  300 kata. Sapa pembaca dengan 'Hello' dengan nama audiens 'Sobat NewsClub' pada paragraf pertama bukan di dalam judul!. Tulislah artikel dalam format HTML tanpa tag html dan body. Judul utama: <h1>. Sub judul: <h2>. Judul kesimpulan: <h3>. Paragraf: <p>. dan di akhir artikel ucapkan sampai jumpa kembali di artikel menarik lainnya. ",
-            'max_tokens' => 3500,
+            'max_tokens' => 2000,
             'temperature' => 0.3,
             'frequency_penalty' => 0.0,
             'presence_penalty' => 0.0
@@ -80,7 +114,7 @@ class PostController extends Controller
 
         $minta_keyword = OpenAI::completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => "ambilkan keyword seo in english dari: ". $artikel_non_html . "pisahkan dengan koma",
+            'prompt' => "ambilkan keyword seo in english 2 kata dari: ". $artikel_non_html . "pisahkan dengan koma",
             'max_tokens' => 75,
         ]);
         $answer_keyword = $minta_keyword['choices'][0]['text'];
@@ -116,7 +150,7 @@ class PostController extends Controller
 
         Keyword::where('id', $keyword->id)->update(['status' => 1]);
 
-        return redirect('/blog');
+        return redirect('/baca/blog');
        
     }
 }

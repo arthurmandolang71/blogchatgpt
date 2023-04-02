@@ -28,7 +28,7 @@ class LoginController extends Controller
         if(Auth::attempt($cridentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/baca/dashboard');
         }
 
         return back()->with('pesan_error','login gagal');
@@ -42,6 +42,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerate();
 
-        return redirect('/login')->with('pesan','anda berhasil logout');
+        return redirect('/baca/login')->with('pesan','anda berhasil logout');
     }
 }

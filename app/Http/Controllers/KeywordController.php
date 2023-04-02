@@ -44,7 +44,7 @@ class KeywordController extends Controller
              Keyword::insertOrIgnore($item);
         }
 
-        return redirect('/dashboard/keyword')->with('pesan','keyword berhasil di upload'); 
+        return redirect('/baca/dashboard/keyword')->with('pesan','keyword berhasil di upload'); 
 
     }
 
