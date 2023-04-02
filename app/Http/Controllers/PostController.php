@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use OpenAI;
+use Throwable;
+use App\Models\Key;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Keyword;
 use App\Models\Category;
 use Illuminate\Support\Str;
-use PharIo\Manifest\Author;
 use Illuminate\Http\Request;
-use OpenAI\Laravel\Facades\OpenAI;
 
 
 
@@ -55,34 +57,32 @@ class PostController extends Controller
             'keyword' => $post->keyword,
             'active' => 'Blog',
             "post" => $post
-        ]);
-    
-
-       
+        ]);  
     }
-
-    private function setEnv($key)
-    {
-        file_put_contents(app()->environmentFilePath(), str_replace(
-            "OPENAI_API_KEY=''" ,
-            "OPENAI_API_KEY='$key'" ,
-            file_get_contents(app()->environmentFilePath())
-        ));
-    }
-
-
 
     public function add()
     {
+        $key = Key::inRandomOrder()->first();
        
-        // env('OPENAI_API_KEY', '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');
-        // $this->setEnv('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');
-
+        $client =  OpenAI::client($key->key);
+      
+        try {
+            $client->completions()->create([
+                    'model' => 'text-davinci-003',
+                    'prompt' => 'teknologi adalah',
+            ]);
+        } catch (Throwable $e) {
+           
+            if($e){
+                 Key::destroy($key->id);
+                return false;
+            }
+        }
 
         $random_penulis = rand(2,6);
         $keyword = Keyword::inRandomOrder()->where('status',0)->first();
-       
-        $minta_judul = OpenAI::completions()->create([
+
+        $minta_judul =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "berikan saya judul artikel tentang $keyword->name dalam bahasa indonesia",
             'max_tokens' => 50,
@@ -91,7 +91,7 @@ class PostController extends Controller
         // return $minta_judul;
         $answer_judul = $minta_judul['choices'][0]['text'];
 
-        $minta_artikel = OpenAI::completions()->create([
+        $minta_artikel =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "Saya ingin membuat sebuah artikel untuk tujuan SEO dan peringkat di mesin pencari Google. Tulislah sebuah artikel dengan judul '$answer_judul' dalam bahasa Indonesia yang santai. Artikel tersebut terdiri dari minimal 20 paragraf. Setiap paragraf harus memiliki  300 kata. Sapa pembaca dengan 'Hello' dengan nama audiens 'Sobat NewsClub' pada paragraf pertama bukan di dalam judul!. Tulislah artikel dalam format HTML tanpa tag html dan body. Judul utama: <h1>. Sub judul: <h2>. Judul kesimpulan: <h3>. Paragraf: <p>. dan di akhir artikel ucapkan sampai jumpa kembali di artikel menarik lainnya. ",
             'max_tokens' => 2000,
@@ -102,7 +102,7 @@ class PostController extends Controller
         $answer_artikel = $minta_artikel['choices'][0]['text'];
         $artikel_non_html = strip_tags($answer_artikel);
     
-        $minta_kesimpulan = OpenAI::completions()->create([
+        $minta_kesimpulan =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "buatkan kesimpulan dari artikel $artikel_non_html. ",
             'max_tokens' => 500,
@@ -112,21 +112,21 @@ class PostController extends Controller
         ]);
         $answer_kesimpulan = $minta_kesimpulan['choices'][0]['text'];
 
-        $minta_keyword = OpenAI::completions()->create([
+        $minta_keyword =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "ambilkan keyword seo in english 2 kata dari: ". $artikel_non_html . "pisahkan dengan koma",
             'max_tokens' => 75,
         ]);
         $answer_keyword = $minta_keyword['choices'][0]['text'];
 
-        $minta_description = OpenAI::completions()->create([
+        $minta_description =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "ambilkan deskripsi seo dari: ". $artikel_non_html,
             'max_tokens' => 100,
         ]);
         $answer_description = $minta_description['choices'][0]['text'];
 
-        $minta_hashtag = OpenAI::completions()->create([
+        $minta_hashtag =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "ambilkan hastag seo dari: ". $artikel_non_html,
             'max_tokens' => 75,

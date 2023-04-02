@@ -25,6 +25,7 @@ class KeyController extends Controller
     public function store(Request $request)
     {
         $item['key'] = $request->input('key');
+    
         Key::insert($item);
         
         return redirect('baca/dashboard/keyopenai')->with('pesan','keyword berhasil di upload'); 

@@ -10,12 +10,11 @@
     <form action="/baca/dashboard/keyopenai" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
-        
         <div class="col-md-8">
             <label for="formFile" class="form-label">key Open AI</label>
             <input class="form-control" type="text"  name="key" >
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <br>
             <button type="submit" class="btn btn-primary">tambah</button>
         </div>
@@ -35,6 +34,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Key Open AI</th>
+              <th scope="col">status</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +42,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->key }}</td>
+                    <td>{{ $item->status }}</td>
                 </tr>
             @endforeach
           </tbody>
