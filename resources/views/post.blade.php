@@ -9,15 +9,15 @@
     @if ($post->count())
 
     <?php
-      // $ambil_keyowrd = explode(" ",$post[0]->keyword);
-      // $gambar = $ambil_keyowrd[0];
+      $ambil_keyowrd = explode(",",$post[0]->keyword);
+      $gambar = $ambil_keyowrd[0];
     ?>
 
     <div class="card mb-3">
         {{-- <img src="https://source.unsplash.com/1200x400/?{{ $post[0]->category->name  }}" class="card-img-top" alt="technolgy"> --}}
-      <img src="https://source.unsplash.com/1200x400/?{{ $post[0]->category->name }}" class="card-img-top" alt="technolgy">
+      <img src="https://source.unsplash.com/1200x400/?{{ trim($gambar) }}" class="card-img-top" alt="technolgy">
         <div class="card-body text-center">
-          <h3 class="card-title"><a href="/{{ $post[0]->slug  }}" class="text-decoration-none text-dark"> {{ $post[0]->title }} </a></h3>
+          <h3 class="card-title"><a href="/{{ $post[0]->slug  }}" class="text-decoration-none text-dark"> {{  str_replace('"','',$post[0]->title) }} </a></h3>
           <p>
               <small>
                     By. <a href="/baca/blog?author={{ $post[0]->author->username  }}" > {{ $post[0]->author->name }} </a> | Category : <a href="/baca/blog?category={{ $post[0]->category->slug }}">{{ $post[0]->category->name }}</a> {{ $post[0]->created_at->diffForHumans() }}
@@ -38,15 +38,15 @@
         <div class="row">
             @foreach ($post->skip(1) as $data)
             <?php
-              // $ambil_keyowrd = explode(" ",$post->keyword);
-              // $gambar = $ambil_keyowrd[0];
+              $ambil_keyowrd = explode(",",$data->keyword);
+              $gambar = $ambil_keyowrd[0];
             ?>
             <div class="col-md-4">
                 <div class="card" >
                     {{-- <a href="/catagories/{{ $data->category->slug }}"><div class="position-absolute px-3 py-2 bg bg-danger text-white">{{ $data->category->name }}</div></a> --}}
-                    <img src="https://source.unsplash.com/500x400/?{{ $data->category->name }}" class="card-img-top" alt="technolgy">
+                    <img src="https://source.unsplash.com/500x400/?{{  trim($gambar)  }}" class="card-img-top" alt="technolgy">
                     <div class="card-body">
-                      <h5 class="card-title "><a href="/{{ $data->slug  }}" class="text-decoration-none text-black">{{ $data->title }}</a></h5>
+                      <h5 class="card-title "><a href="/{{ $data->slug  }}" class="text-decoration-none text-black">{{  str_replace('"','',$data->title) }}</a></h5>
                       <p>
                         <small>
                               By. <a href="/baca/blog?author={{ $data->author->username  }}" > {{ $data->author->name }} </a> | Category : <a href="/baca/blog?category={{ $data->category->slug }}">{{ $data->category->name }}</a> {{ $data->created_at->diffForHumans() }}

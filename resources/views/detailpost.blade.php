@@ -26,7 +26,15 @@
                     <article class="my-3 fs-5"> {!! $post->kesimpulan !!} </article>
 
                     <article class="my-3 fs-5"> {{ $post->hastag }} </article>
-                   
+                
+                <h4>Baca Juga : </h4>
+                <ul>
+                    @foreach ($artikel_lain as $item)
+                        <li>
+                            <a href="{{ $item->slug }}">{{ str_replace('"','',$item->title )}}</a>
+                        </li>
+                    @endforeach
+                </ul>
                 <a href="/blog">kembali</a >
             </div>
         </div>

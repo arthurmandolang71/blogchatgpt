@@ -49,14 +49,17 @@ class PostController extends Controller
        if($request->segment(1) == NULL){
             return redirect('baca/blog');
        }
-  
+
+        $artikel_lain = Post::inRandomOrder()->where('category_id',$post->category_id)->limit(3)->get();
+    //    dd($artikel_lain);
         return view('detailpost',[
             'author' => $post->author->name,
             "title" => $post->title,
             'description' => $post->description,
             'keyword' => $post->keyword,
             'active' => 'Blog',
-            "post" => $post
+            "post" => $post,
+            "artikel_lain" => $artikel_lain
         ]);  
     }
 
@@ -84,7 +87,7 @@ class PostController extends Controller
 
         $minta_judul =  $client->completions()->create([
             'model' => 'text-davinci-003',
-            'prompt' => "berikan saya judul artikel tentang $keyword->name dalam bahasa indonesia",
+            'prompt' => "berikan saya judul artikel tentang $keyword->name dalam bahasa indonesia tanpa tanda petik",
             'max_tokens' => 50,
         ]);
 
