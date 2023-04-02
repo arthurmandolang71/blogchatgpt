@@ -44,9 +44,9 @@ class PostController extends Controller
     public function show(Post $post, Request $request)
     {
     //    dd($request->segment(0));
-    //    if($request->segment(0) == NULL){
-    //         return redirect('baca/blog');
-    //    }
+       if($request->segment(1) == NULL){
+            return redirect('baca/blog');
+       }
   
         return view('detailpost',[
             'author' => $post->author->name,
