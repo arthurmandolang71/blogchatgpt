@@ -23,7 +23,7 @@
 
                     <img src="https://source.unsplash.com/1200x400/?{{ $gambar_2 }}" class="card-img-top" alt="technolgy">
 
-                    <article class="my-3 fs-5"> {!! $post->kesimpulan !!} </article>
+                    {{-- <article class="my-3 fs-5"> {!! $post->kesimpulan !!} </article> --}}
 
                     <article class="my-3 fs-5"> {{ $post->hastag }} </article>
                 

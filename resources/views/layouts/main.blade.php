@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Author: {{ $author ?? '' }}. {{ trim($description ?? "" )   }}">
+    <meta name="description" content="Penulis: {{ $author ?? '' }}. {{ trim($description ?? "" )   }}">
     <meta name="google-site-verification" content="">
     <meta name="robots" content="">
     

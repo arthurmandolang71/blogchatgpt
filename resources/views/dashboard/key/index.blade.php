@@ -34,7 +34,7 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Key Open AI</th>
-              <th scope="col">status</th>
+             
             </tr>
           </thead>
           <tbody>
@@ -42,7 +42,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->key }}</td>
-                    <td>{{ $item->status }}</td>
+                    {{-- <td>{{ $item->status }}</td> --}}
                 </tr>
             @endforeach
           </tbody>

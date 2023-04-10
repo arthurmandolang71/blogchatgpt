@@ -65,7 +65,8 @@
     <p class="text-center fs-4">No post found</p>
   @endif
 
-  {{-- {{ $post->links(); }} --}}
+  <br>
+  {{ $post->links(); }}
 
 
 @endsection
