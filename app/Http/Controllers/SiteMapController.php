@@ -13,5 +13,13 @@ class SiteMapController extends Controller
         return response()->view('sitemap', [
             'posts' => $posts
         ])->header('Content-Type', 'text/xml');
-      }
+    }
+
+    public function page() {
+      
+        return response()->view('sitemap_page', [
+          
+        ])->header('Content-Type', 'text/xml');
+    }
+
 }

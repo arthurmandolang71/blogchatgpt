@@ -85,3 +85,5 @@ Route::post('/baca/dashboard/keyopenai', [KeyController::class, 'store'])->middl
 
 Route::get('/baca/sitemap.xml', [SiteMapController::class, 'index']);
 
+Route::get('/baca/sitemap_page.xml', [SiteMapController::class, 'page']);
+

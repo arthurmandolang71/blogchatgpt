@@ -30,9 +30,6 @@
             <a class="nav-link {{ (request()->get('category') === "bisnis") ? 'active' : '' }}" href="/baca/blog?category=bisnis" >Bisnis</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->get('category') === "politik") ? 'active' : '' }}" href="/baca/blog?category=politik" >Politik</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link {{ (request()->get('category') === "pendidikan") ? 'active' : '' }}" href="/baca/blog?category=pendidikan" >Pendidikan</a>
           </li>
           <li class="nav-item">
