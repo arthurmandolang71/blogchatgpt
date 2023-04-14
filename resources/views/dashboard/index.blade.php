@@ -8,6 +8,10 @@
       <h1 class="h2">Wellcome back {{ auth()->user()->name }}</h1>
     </div>
 
+    <div class="container">
+      total post : {{ $total }}
+    </div>
+
     </div>
   </main>
 

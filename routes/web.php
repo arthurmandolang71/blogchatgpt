@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KeyController;
@@ -60,7 +61,10 @@ Route::post('/baca/logout', [LoginController::class, 'logout']);
 // Route::post('register', [RegisterController::class, 'store']);
 
 Route::get('/baca/dashboard', function() {
+    $total = Post::count();
+   
     return view('dashboard.index',[
+        'total' => $total,
         'title' => 'dashboard',
     ]);
 })->middleware('auth');

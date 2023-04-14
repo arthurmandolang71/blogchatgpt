@@ -21,7 +21,7 @@
 
                     <article class="my-3 fs-5"> {!! $post->body !!} </article>
 
-                    <img src="https://source.unsplash.com/1200x400/?{{ $gambar_2 }}" class="card-img-top" alt="technolgy">
+                    <img src="https://source.unsplash.com/1200x400/?{{ $gambar_2 }}" class="card-img-top" alt="{{ $gambar_2 }}">
 
                     {{-- <article class="my-3 fs-5"> {!! $post->kesimpulan !!} </article> --}}
 
