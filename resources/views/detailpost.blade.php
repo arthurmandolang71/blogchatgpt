@@ -6,7 +6,7 @@
     <?php
         $ambil_keyowrd = explode(" ",$post->keyword);
         $gambar_1 = $ambil_keyowrd[0];
-        $gambar_2 = $ambil_keyowrd[1];
+        // $gambar_2 = $ambil_keyowrd[1];
         // print_r($gambar_1); exit();
     ?>
 
@@ -21,7 +21,7 @@
 
                     <article class="my-3 fs-5"> {!! $post->body !!} </article>
 
-                    <img src="https://source.unsplash.com/1200x400/?{{ $gambar_2 }}" class="card-img-top" alt="{{ $gambar_2 }}">
+                    {{-- <img src="https://source.unsplash.com/1200x400/?{{ $gambar_1 }}" class="card-img-top" alt="{{ $gambar_1 }}"> --}}
 
                     {{-- <article class="my-3 fs-5"> {!! $post->kesimpulan !!} </article> --}}
 
