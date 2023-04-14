@@ -10,6 +10,7 @@ use App\Http\Controllers\KeywordController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\SiteMapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,4 +81,7 @@ Route::post('/baca/dashboard/keyword', [KeywordController::class, 'store'])->mid
 
 Route::get('/baca/dashboard/keyopenai', [KeyController::class, 'index'])->middleware('auth');
 Route::post('/baca/dashboard/keyopenai', [KeyController::class, 'store'])->middleware('auth');
+
+
+Route::get('/baca/sitemap.xml', [SiteMapController::class, 'index']);
 
