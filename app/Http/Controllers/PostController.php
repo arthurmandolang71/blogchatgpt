@@ -97,7 +97,7 @@ class PostController extends Controller
         $minta_artikel =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "Saya ingin membuat sebuah artikel untuk tujuan SEO dan peringkat di mesin pencari Google. Tulislah sebuah artikel dengan judul '$answer_judul' dalam bahasa Indonesia yang santai. Artikel tersebut terdiri dari minimal 20 paragraf. Setiap paragraf harus memiliki  300 kata. Sapa pembaca dengan 'Hello' dengan nama audiens 'Sobat NewsClub' pada paragraf pertama bukan di dalam judul!. Tulislah artikel dalam format HTML tanpa tag html dan body. Judul utama: <h1>. Sub judul: <h2>. Judul kesimpulan: <h3>. Paragraf: <p>. dan di akhir artikel ucapkan sampai jumpa kembali di artikel menarik lainnya. ",
-            // 'max_tokens' => 2000,
+            'max_tokens' => 2000,
             'temperature' => 0.3,
             'frequency_penalty' => 0.0,
             'presence_penalty' => 0.0
