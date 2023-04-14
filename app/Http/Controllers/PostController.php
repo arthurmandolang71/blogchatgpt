@@ -118,21 +118,21 @@ class PostController extends Controller
         $minta_keyword =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "ambilkan keyword seo in english 2 kata dari: ". $artikel_non_html . "pisahkan dengan koma",
-            // 'max_tokens' => 75,
+            'max_tokens' => 75,
         ]);
         $answer_keyword = $minta_keyword['choices'][0]['text'];
 
         $minta_description =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "ambilkan deskripsi seo dari: ". $artikel_non_html,
-            // 'max_tokens' => 100,
+            'max_tokens' => 100,
         ]);
         $answer_description = $minta_description['choices'][0]['text'];
 
         $minta_hashtag =  $client->completions()->create([
             'model' => 'text-davinci-003',
             'prompt' => "ambilkan hastag seo dari: ". $artikel_non_html,
-            // 'max_tokens' => 75,
+            'max_tokens' => 75,
         ]);
         $answer_hashtag = $minta_hashtag['choices'][0]['text'];
 
