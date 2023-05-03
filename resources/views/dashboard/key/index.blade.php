@@ -7,7 +7,7 @@
       <h1 class="h2">Keyword</h1>
     </div>
 
-    <form action="/baca/dashboard/keyopenai" method="post" enctype="multipart/form-data">
+    <form action="/dashboard/keyopenai" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-md-8">

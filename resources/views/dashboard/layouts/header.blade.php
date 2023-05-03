@@ -6,7 +6,7 @@
     <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-          <form action="/baca/logout" method="post">
+          <form action="/logout" method="post">
               @csrf
               <button class="nav-link px-3 text-black">Logout</button>
           </form>

@@ -25,7 +25,6 @@ class KeywordController extends Controller
     {
         $file = $request->file('file_csv')->getPathName();
         
-
         $data =  array_map('str_getcsv', file($file));
 
         unset($data[0]);
@@ -44,7 +43,7 @@ class KeywordController extends Controller
              Keyword::insertOrIgnore($item);
         }
 
-        return redirect('/baca/dashboard/keyword')->with('pesan','keyword berhasil di upload'); 
+        return redirect('/dashboard/keyword')->with('pesan','keyword berhasil di upload'); 
 
     }
 

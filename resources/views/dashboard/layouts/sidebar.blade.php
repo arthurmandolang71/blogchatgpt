@@ -2,25 +2,25 @@
     <div class="position-sticky pt-3 sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('/baca/dashboard') ? 'active' : '' }}" aria-current="page" href="/baca/dashboard">
+          <a class="nav-link {{ Request::is('/dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard">
             <span data-feather="home" class="align-text-bottom"></span>
             Dashboard
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('/baca/dashboard/posts*') ? 'active' : '' }}" href="/baca/dashboard/posts">
+        {{-- <li class="nav-item">
+          <a class="nav-link {{ Request::is('/dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
             <span data-feather="file" class="align-text-bottom"></span>
             My Post
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('/baca/dashboard/keyword*') ? 'active' : '' }}" href="/baca/dashboard/keyword">
+          <a class="nav-link {{ Request::is('/dashboard/keyword*') ? 'active' : '' }}" href="/dashboard/keyword">
             <span data-feather="file" class="align-text-bottom"></span>
             Keyword
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('/baca/dashboard/keyopenai*') ? 'active' : '' }}" href="/baca/dashboard/keyopenai">
+          <a class="nav-link {{ Request::is('/dashboard/keyopenai*') ? 'active' : '' }}" href="/dashboard/keyopenai">
             <span data-feather="file" class="align-text-bottom"></span>
             Key Open AI
           </a>

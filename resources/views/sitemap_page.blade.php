@@ -5,43 +5,43 @@
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=dunia</loc>
+    <loc>{{ url('/') }}/blog?category=dunia</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=indonesia</loc>
+    <loc>{{ url('/') }}/blog?category=indonesia</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=teknologi</loc>
+    <loc>{{ url('/') }}/blog?category=teknologi</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=desain</loc>
+    <loc>{{ url('/') }}/blog?category=desain</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=budaya</loc>
+    <loc>{{ url('/') }}/blog?category=budaya</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=bisnis</loc>
+    <loc>{{ url('/') }}/blog?category=bisnis</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=pendidikan</loc>
+    <loc>{{ url('/') }}/blog?category=pendidikan</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=sains</loc>
+    <loc>{{ url('/') }}/blog?category=sains</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=kesehatan</loc>
+    <loc>{{ url('/') }}/blog?category=kesehatan</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
   <url>
-    <loc>{{ url('/') }}/baca/blog?category=wisata</loc>
+    <loc>{{ url('/') }}/blog?category=wisata</loc>
     <lastmod>2023-04-01</lastmod>
   </url>
 

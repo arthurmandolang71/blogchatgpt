@@ -31,18 +31,13 @@ use App\Http\Controllers\SiteMapController;
 //     ]);
 // });
 
+Route::get('/', [PostController::class, 'index']);
 
+Route::get('/blog/{post:slug}', [PostController::class, "show"]);
 
+// Route::get('/', [PostController::class, "show"]);
 
-
-
-Route::get('/baca/blog', [PostController::class, 'index']);
-
-Route::get('/{post:slug}', [PostController::class, "show"]);
-
-Route::get('/', [PostController::class, "show"]);
-
-Route::get('baca/add', [PostController::class, "add"]);
+Route::get('/add', [PostController::class, "add"]);
 
 
 // Route::get('categories', function () {
@@ -53,15 +48,15 @@ Route::get('baca/add', [PostController::class, "add"]);
 //         ]);
 // });
 
-Route::get('/baca/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
-Route::post('/baca/login', [LoginController::class, 'auth']);
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'auth']);
 
-Route::post('/baca/logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 // Route::get('register', [RegisterController::class, 'index'])->middleware('guest');
 // Route::post('register', [RegisterController::class, 'store']);
 
-Route::get('/baca/dashboard', function() {
+Route::get('/dashboard', function() {
     $total = Post::count();
    
     return view('dashboard.index',[
@@ -76,14 +71,14 @@ Route::get('/baca/dashboard', function() {
 
 // Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('auth');
 
-Route::get('/baca/dashboard/keyword', [KeywordController::class, 'index'])->middleware('auth');
-Route::post('/baca/dashboard/keyword', [KeywordController::class, 'store'])->middleware('auth');
+Route::get('/dashboard/keyword', [KeywordController::class, 'index'])->middleware('auth');
+Route::post('/dashboard/keyword', [KeywordController::class, 'store'])->middleware('auth');
 
-Route::get('/baca/dashboard/keyopenai', [KeyController::class, 'index'])->middleware('auth');
-Route::post('/baca/dashboard/keyopenai', [KeyController::class, 'store'])->middleware('auth');
+Route::get('/dashboard/keyopenai', [KeyController::class, 'index'])->middleware('auth');
+Route::post('/dashboard/keyopenai', [KeyController::class, 'store'])->middleware('auth');
 
 
-Route::get('/baca/sitemap.xml', [SiteMapController::class, 'index']);
+Route::get('/sitemap.xml', [SiteMapController::class, 'index']);
 
-Route::get('/baca/sitemap_page.xml', [SiteMapController::class, 'page']);
+Route::get('/sitemap_page.xml', [SiteMapController::class, 'page']);
 

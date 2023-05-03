@@ -2,7 +2,7 @@
 
 @section('container')
 <main class="form-signin w-100 m-auto">
-    <form action="/baca/login" method="post">
+    <form action="/login" method="post">
       @csrf
 
       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>

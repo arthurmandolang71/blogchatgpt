@@ -1,5 +1,5 @@
 
-@extends('layouts.main')
+@extends('layouts.main_artikel')
 
 @section('container')
 
@@ -17,7 +17,7 @@
       
                     <img src="https://source.unsplash.com/1200x400/?{{ $gambar_1 }}" class="card-img-top" alt="{{ $gambar_1 }}">
 
-                    <p> By. <a href="/blog?category={{ $post->author->username  }}" > {{ $post->author->name }} </a> | Category : <a href="/blog?category={{ $post->category->slug }}">{{ $post->category->name }}</a> </p>
+                    <p> By. <a href="/blog?author={{ $post->author->username  }}" > {{ $post->author->name }} </a> | Category : <a href="/blog?category={{ $post->category->slug }}">{{ $post->category->name }}</a> </p>
 
                     <article class="my-3 fs-5"> {!! $post->body !!} </article>
 
@@ -25,7 +25,7 @@
 
                     {{-- <article class="my-3 fs-5"> {!! $post->kesimpulan !!} </article> --}}
 
-                    <article class="my-3 fs-5"> {{ $post->hastag }} </article>
+                    {{-- <article class="my-3 fs-5"> {{ $post->hastag }} </article> --}}
                 
                 <h4>Baca Juga : </h4>
                 <ul>

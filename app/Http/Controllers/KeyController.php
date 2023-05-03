@@ -28,7 +28,7 @@ class KeyController extends Controller
     
         Key::insert($item);
         
-        return redirect('baca/dashboard/keyopenai')->with('pesan','keyword berhasil di upload'); 
+        return redirect('dashboard/keyopenai')->with('pesan','keyword berhasil di upload'); 
 
     }
 
